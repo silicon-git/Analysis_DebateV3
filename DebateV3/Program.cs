@@ -104,10 +104,10 @@ class Program
 					
 					byte[] difficultyData = reader.ReadBytes(2);
                     ushort difficulty = BitConverter.ToUInt16(difficultyData, 0);
-					
+			
                     writer.WriteLine($"ID_Dialogue <{dialogId}>");
                     writer.WriteLine($"ID_Section <{sectionId}>");
-                    writer.WriteLine($"Minimum_Difficulty <{difficulty}>");
+                    writer.WriteLine($"CHK_ID <{difficulty}>");
 					
                     for (int j = 0; j < 199; j++)
                     {
@@ -116,11 +116,39 @@ class Program
                             break;
 
                         ushort unknownValue = BitConverter.ToUInt16(unknownData, 0);
-                        if (j == 179)
+                        if (j == 0)
+                        {
+                            writer.WriteLine($"Minimum_Difficulty <{unknownValue}>");
+                        }
+                        else if (j == 2)
+                        {
+                            writer.WriteLine($"Seconds_Recovered_from_NOISE <{unknownValue}>");
+                        }
+                        else if (j == 3)
+                        {
+                            writer.WriteLine($"NOISE_durability <{unknownValue}>");
+                        }
+                        else if (j == 5)
+                        {
+                            writer.WriteLine($"Truth_Bullet_needed <{unknownValue}>");
+                        }
+                        else if (j == 12)
+                        {
+                            writer.WriteLine($"Reverse_delay <{unknownValue}>");
+                        }
+                        else if (j == 14)
+                        {
+                            writer.WriteLine($"End_transition_timing_TEXT_RELIANT <{unknownValue}>");
+                        }
+                        else if (j == 16)
+                        {
+                            writer.WriteLine($"End_transition_timing_TEXT_INDEPENDENT <{unknownValue}>");
+                        }
+                        else if (j == 168)
                         {
                             writer.WriteLine($"Character_ID <{unknownValue}>");
                         }
-                        else if (j == 180)
+                        else if (j == 169)
                         {
                             writer.WriteLine($"Character_anim <{unknownValue}>");
                         }
